@@ -11,7 +11,8 @@ const router = express(),
     server = http.createServer(router);
 
     router.get("/", function(req, res) {
-        
+
+        res.writeHead(200, {'Content-Type' : text/html})
     })
 
     server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0.", function() {

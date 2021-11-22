@@ -10,11 +10,11 @@ const   http = require('http'), // this module provides HTTP server funcions
 const router = express(),
     server = http.createServer(router);
 
-    router.get("/", function(req, res) {
+    router.get("/", function(req, res, next) {
         res.writeHead(200, {'Content-Type' : 'text/html'})
         
-        let xml = fs.readFileSync('PaddyCafe.xml', 'utf8'),
-            xsl = fs.readFileSync('PaddyCafe.xsl', 'utf8');
+        let xml = fs.readFileSync('PaddysCafe.xml', 'utf8'),
+            xsl = fs.readFileSync('PaddysCafe.xsl', 'utf8');
 
             let doc = xmlParse(xml),
             stylesheet = xmlParse(xsl);
@@ -22,9 +22,10 @@ const router = express(),
             let result = xsltProcess(doc, stylesheet);
 
             res.end(result.toString());
+            next();
     })
 
-    server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0.", function() {
+    server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function() {
             const addr = server.address();
             console.log("Server listening at: ", addr.address , ": " , addr.port)
     })

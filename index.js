@@ -24,12 +24,11 @@ router.get('/get/html', function(req, res) {
     let doc = xmlParse(xml),
         stylesheet = xmlParse(xsl);
 
-    console.log(doc);
-    console.log(stylesheet);
+    // console.log(doc);
+    // console.log(stylesheet);
 
     let result = xsltProcess(doc, stylesheet);
 
-    console.log(result);
 
     res.end(result.toString());
 
